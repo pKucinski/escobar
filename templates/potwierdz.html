@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% block title %} EscoBar {% endblock %}
+{% block body %}
+{% load static %}
+{% load bootstrap %}
+
+<form method="POST" class="m-5">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-6 col card bg-dark p-3 border">
+            {% csrf_token %}
+            <h1>Usuwanie</h1>
+            <h3>Czy na pewno chcesz usunąć pozycje "{{form.name}}"?</h3>
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-danger mt-4 w-100">Tak</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary mt-4 w-100" onClick="window.location.href='/#menu';"> Nie </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+{% endblock %}

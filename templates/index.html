@@ -1,0 +1,252 @@
+{% extends 'main.html' %}
+{% block title %} EscoBar {% endblock %}
+{% block body %}
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand d-lg-none" href="#"><img src="{% static 'img/logo.jpg'%}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbarToggler7"
+            aria-controls="myNavbarToggler7" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse"  id="myNavbarToggler7">
+        <div class="annotation p-3  ">
+                <p>Dzisiaj jesteśmy otwarci do 24:00</p>
+            </div>
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <a class="nav-link pt-4 px-3" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link pt-4 px-3" href="#menu">Menu</a>
+            </li>
+            <a class="d-none d-lg-block" href="#"><img src="{% static 'img/logo.jpg'%}"></a>
+            <li class="nav-item">
+                <a class="nav-link pt-4 px-3" href="#gallery">Galeria</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link pt-4 px-3" href="#contact">Kontakt</a>
+            </li>
+        </ul>
+                <div class="fun-fact p-3 col-lg-3">
+                <p>{{ fun_facts|random }}</p>
+            </div>
+    </div>
+</nav>
+
+<div class="bg"></div>
+<div id="container">
+    <div class="section row">
+        <div class="col-lg-6 mx-auto">
+                <div class="carousel-caption d-md-block align-items-center">
+                    <h1 style="font-weight-bold; color:#fff; text-shadow: black 0.1em 0.1em 0.2em" class="tittle display-2">ESCOBAR OLSZTYNEK</h1>
+                    <h2 style="text-shadow: black 0.1em 0.1em 0.2em" class="text-uppercase">Zamów jedzenie w escobarze a dodatkowo przywieziemy ci wybrane produkty ze sklepu Zyg-Zak </h2>
+                </div>
+        </div>
+    </div>
+
+    <div id="about-us" class="section">
+        <div class="mx-auto px-5">
+            <h1 class="tittle-section">O NAS</h1>
+            <div class="row">
+                <div class="col-xl-6">
+                    <img class="img-fluid px-5" src="{% static 'img/front.jpg'%}" alt="">
+                </div>
+                <div class="col-xl-6 pt-2">
+                    <p style="text-align: justify">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="full-image" class="align-items-center">
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <img onclick="hideImg()" class="mx-auto d-block" src="{% static 'img/gallery/1.jpg'%}" alt="">
+    </div>
+
+
+
+
+    <div id="gallery" class="section row">
+            <h1 class="tittle-section">GALERIA</h1>
+        <div id="lb-back">
+            <div id="lb-img"></div>
+        </div>
+        <div class="col-md-4 p-3">
+            <img src="{% static 'img/gallery/1.jpg'%}" class="zoomD img-fluid"/>
+        </div>
+        <div class="col-md-4 p-3">
+            <img src="{% static 'img/gallery/1.jpg'%}" class="zoomD img-fluid"/>
+        </div>
+        <div class="col-md-4 p-3">
+            <img src="{% static 'img/gallery/2.jpg'%}" class="zoomD img-fluid"/>
+        </div>
+        <div class="col-md-4 p-3">
+            <img src="{% static 'img/gallery/3.jpg'%}" class="zoomD img-fluid"/>
+        </div>
+        <div class="col-md-4 p-3">
+            <img src="{% static 'img/gallery/4.jpg'%}" class="zoomD img-fluid"/>
+        </div>
+        <div class="col-md-4 p-3">
+            <img src="{% static 'img/gallery/5.jpg'%}" class="zoomD img-fluid"/>
+        </div>
+    </div>
+
+    <div id="menu" class="section">
+        <h1 class="tittle-section">MENU</h1>
+        <div class="menu-bar my-5 text-center" >
+            <div class="row noselect">
+                <div class="col-sm">
+                    <h4 id="pizza-div" onclick="showMe('pizza-menu')" class="p-2">PIZZA {% if user.is_authenticated %}<a class="admin-button" href="/nowa_pizza"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
+                </div>
+                <div class="col-sm">
+                    <h4 id="dishes-div" onclick="showMe('dishes-menu')" class="p-2">DANIA {% if user.is_authenticated %}<a class="admin-button" href="/nowe_danie"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
+                </div>
+                <div class="col-sm">
+                    <h4 id="alcohol-div" onclick="showMe('alcohol-menu')" class="p-2">ALKOHOLE {% if user.is_authenticated %}<a class="admin-button" href="/nowy_alkohol"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
+                </div>
+                <div class="col-sm">
+                    <h4 id="drinks-div" onclick="showMe('drinks-menu')" class="p-2">DRINKI {% if user.is_authenticated %}<a class="admin-button" href="/nowy_drink"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
+                </div>
+            </div>
+        </div>
+    <div class="menu-border">
+        <div id="pizza-menu" class="dish-list">
+            <div class="tittle-dishes">
+                <h2>PIZZA</h2>
+                <h5>32cm / 40cm</h5>
+            </div>
+            <div class="px-5 row pt-4">
+                {% for single_pizza in pizza %}
+            <div class="dish col-8 col-sm-10 ">
+                <h3 class="dots">{{ single_pizza.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_pizza/{{ single_pizza.pk }}"> <i class="fas fa-edit"></i></a> <a class="admin-button" href="usun_pizza/{{ single_pizza.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
+                <p class="text-lowercas">({{ single_pizza.description }})</p>
+            </div>
+            <div class="price-1 col-2 col-sm-1 img-fluid">
+                <h4>{{single_pizza.price_small}}zł</h4>
+            </div>
+            <div class="price col-2 col-sm-1">
+                <h4>{{single_pizza.price_big}}zł</h4>
+            </div>
+                {% endfor %}
+        </div>
+        </div>
+
+        <div id="dishes-menu" class="dish-list" style="display:none;" >
+            <dic class="tittle-dishes">
+                <h2>DANIA</h2>
+            </dic>
+            <div class="px-5 row">
+                {% for single_dish in dish %}
+            <div class="dish col-10">
+                <h3 class="dots">{{ single_dish.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_danie/{{ single_dish.pk }}"> <i class="fas fa-edit"></i></a> <a class="admin-button" href="usun_danie/{{ single_dish.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
+                <p class="text-lowercas">({{ single_dish.description }})</p>
+            </div>
+            <div class="price-1 col-1">
+                <h4>{{single_dish.price}}zł</h4>
+            </div>
+                {% endfor %}
+        </div>
+
+        </div>
+
+        <div id="alcohol-menu" class="dish-list" style="display:none;" >
+            <dic class="tittle-dishes">
+                <h2>ALKOHOLE</h2>
+            </dic>
+            <div class="px-5 row">
+                {% for single_alcohol in alcohol %}
+            <div class="dish col-10">
+                <h3 class="dots">{{ single_alcohol.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_alkohol/{{ single_alcohol.pk }}"> <i class="fas fa-edit"></i></a><a class="admin-button" href="usun_alkohol/{{ single_alcohol.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
+                <p class="text-lowercas">({{ single_alcohol.description }})</p>
+            </div>
+            <div class="price-1 col-1">
+                <h4>{{single_alcohol.price}}zł</h4>
+            </div>
+                {% endfor %}
+        </div>
+
+        </div>
+
+        <div id="drinks-menu" class="dish-list" style="display:none;" >
+            <dic class="tittle-dishes">
+                <h2>DRINKI</h2>
+            </dic>
+            <div class="px-5 row">
+                {% for single_drink in drink %}
+            <div class="dish col-10">
+                <h3 class="dots">{{ single_drink.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_drink/{{ single_drink.pk }}"> <i class="fas fa-edit"></i></a><a class="admin-button" href="usun_drink/{{ single_drink.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
+                <p class="text-lowercas">({{ single_drink.description }})</p>
+            </div>
+            <div class="price-1 col-1">
+                <h4>{{single_drink.price}}zł</h4>
+            </div>
+                {% endfor %}
+        </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="contact" class="section">
+    <h1 class="tittle-section">KONTAKT</h1>
+
+    <div class="row section">
+        <div class="col frame-border">
+            <div class="row">
+                <div class="col-sm-6 my-auto">
+                    <h2 class="pt-3">Numer</h2>
+                    <a style="color: #ddd9d6 !important;" href="tel:+38573291874">573 291 874</a>
+                    <h2 class="pt-3">Adres</h2>
+                    <p>Pułaskiego 1 <br> 11-015 Olsztynek</p>
+                    <a href="https://www.instagram.com/escobar_olsztynek_/" target="_blank"><i class="fab fa-3x fa-instagram-square p-2"></i></a>
+                    <a href="https://www.facebook.com/Escobar-Olsztynek-111972186855681/" target="_blank"><i class="fab fa-3x fa-facebook-square p-2"></i></a>
+                </div>
+                <div class="open col-sm-6 my-auto">
+                    <h2>Godziny otwarcia</h2>
+                    <div class="row">
+                        <div class="days col text-end">
+                            <p>Poniedziałek</p>
+                            <p>Wtorek</p>
+                            <p>Środa</p>
+                            <p>Czwartek</p>
+                            <p>Piątek</p>
+                            <p>Sobota</p>
+                            <p>Niedziela</p>
+                        </div>
+                        <div class="col text-start">
+                            <p>zamknięte</p>
+                            <p>14-22</p>
+                            <p>14-22</p>
+                            <p>14-22</p>
+                            <p>14-24</p>
+                            <p>14-24</p>
+                            <p>14-22</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="d-none d-xl-block col-lg">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9474.800546726623!2d20.2849874!3d53.5809681!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7b1902f38bdb18f4!2sEscobar!5e0!3m2!1spl!2spl!4v1629213554934!5m2!1spl!2spl" width="540" height="340" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

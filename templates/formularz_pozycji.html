@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+{% block title %} EscoBar {% endblock %}
+{% block body %}
+{% load static %}
+{% load bootstrap %}
+
+<form method="post" enctype="multipart/form-data" class="m-5">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6 col card bg-dark p-3 border">
+
+            {% if new_product %}
+                <h1>Nowa pozycja</h1>
+            {% else %}
+                <div>
+                    <h2 class="float-start">Edytuj pozycje</h2>
+                    <a class="float-end admin-button" href="/usun_danie/{{ id }}"> <i class="fas fa-trash-alt"></i></a>
+                </div>
+            {% endif %}
+
+            {{ form|bootstrap }}
+            <div class="row">
+                <div class="col">
+                    {% if new_product %}
+                        <button class="btn btn-success mt-4 w-100" type="submit">Dodaj produkt</button>
+                    {% else %}
+                        <button class="btn btn-warning mt-4 w-100" type="submit">Edytuj produkt</button>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary mt-4 w-100" onClick="window.location.href='/#menu';"> Powrót </button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 col">
+            <img src="{% static 'img/logo-revers.png'%}">
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% block title %} EscoBar {% endblock %}
+{% block body %}
+{% load static %}
+{% load bootstrap %}
+
+<form method="post" enctype="multipart/form-data" class="m-5 pb-5">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6 col card bg-dark p-3 border">
+            <h2 class="float-start">Edytuj godziny otwarcia</h2>
+    <form>
+        <div class="row">
+            <div class="my-2">
+               {{ form.day_start }}
+               {{ form.day_end }}
+               {{ form.if_open }} czy otwarte
+            </div>
+
+        </div>
+    </form>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-warning mt-4 w-100" type="submit">Edytuj godziny</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary mt-4 w-100" onClick="window.location.href='/#menu';"> Powrót </button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6 col">
+            <img src="{% static 'img/logo-revers.png'%}">
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

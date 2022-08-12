@@ -15,21 +15,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import index, new_position, edit, delete
+from main.views import index, new_position, edit, delete, edit_hours
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('nowe_danie', new_position),
+    path('nowy_cos_na_zab', new_position),
     path('nowa_pizza', new_position),
-    path('nowy_alkohol', new_position),
+    path('nowa_kawa', new_position),
+    path('nowe_piwo', new_position),
+    path('nowa_wodka', new_position),
+    path('nowy_kieliszek', new_position),
     path('nowy_drink', new_position),
-    path('edytuj_danie/<int:id>/', edit),
+    path('edytuj_cos_na_zab/<int:id>/', edit),
     path('edytuj_pizza/<int:id>/', edit),
-    path('edytuj_alkohol/<int:id>/', edit),
+    path('edytuj_kawa/<int:id>/', edit),
+    path('edytuj_piwo/<int:id>/', edit),
+    path('edytuj_wodka/<int:id>/', edit),
+    path('edytuj_kieliszek/<int:id>/', edit),
     path('edytuj_drink/<int:id>/', edit),
-    path('usun_danie/<int:id>/', delete),
+    path('usun_cos_na_zab/<int:id>/', delete),
     path('usun_pizza/<int:id>/', delete),
-    path('usun_alkohol/<int:id>/', delete),
+    path('usun_kawa/<int:id>/', delete),
+    path('usun_piwo/<int:id>/', delete),
+    path('usun_wodka/<int:id>/', delete),
     path('usun_drink/<int:id>/', delete),
+    path('usun_kieliszek/<int:id>/', delete),
+
+    path('edycja_godzin_otwarcia/<int:id>/', edit_hours),
 ]

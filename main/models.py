@@ -1,5 +1,4 @@
 from django.core.validators import MinValueValidator
-
 from django.db import models
 
 
@@ -27,7 +26,7 @@ class Drink(models.Model):
         return self.name
 
 
-class Dish(models.Model):
+class Meal(models.Model):
     name = models.CharField(max_length=30, blank=False, null=False, verbose_name="Nazwa")
     description = models.TextField(blank=True, null=True, verbose_name="opis")
     price = models.IntegerField(blank=False, null=False, validators=[MinValueValidator(0)], verbose_name="Cena (zł)")
@@ -36,7 +35,23 @@ class Dish(models.Model):
         return self.name
 
 
-class Alcohol(models.Model):
+class Shot(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False, verbose_name="Nazwa")
+    description = models.TextField(blank=True, null=True, verbose_name="opis")
+    price = models.IntegerField(blank=False, null=False, validators=[MinValueValidator(0)], verbose_name="Cena (zł)")
+
+    def __str__(self):
+        return self.name
+
+class Vodka(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False, verbose_name="Nazwa")
+    description = models.TextField(blank=True, null=True, verbose_name="opis")
+    price = models.IntegerField(blank=False, null=False, validators=[MinValueValidator(0)], verbose_name="Cena (zł)")
+
+    def __str__(self):
+        return self.name
+
+class Coffee(models.Model):
     name = models.CharField(max_length=30, blank=False, null=False, verbose_name="Nazwa")
     description = models.TextField(blank=True, null=True, verbose_name="opis")
     price = models.IntegerField(blank=False, null=False, validators=[MinValueValidator(0)], verbose_name="Cena (zł)")
@@ -45,23 +60,20 @@ class Alcohol(models.Model):
         return self.name
 
 
-class Data(models.Model):
-    description = models.TextField(blank=False, null=False)
-    phone = models.IntegerField(null=False, blank=False)
-    monday_start = models.TimeField(blank=True, null=True)
-    monday_end = models.TimeField(blank=True, null=True)
-    tuesday_start = models.TimeField(blank=True, null=True)
-    tuesday_end = models.TimeField(blank=True, null=True)
-    wednesday_start = models.TimeField(blank=True, null=True)
-    wednesday_end = models.TimeField(blank=True, null=True)
-    thursday_start = models.TimeField(blank=True, null=True)
-    thursday_end = models.TimeField(blank=True, null=True)
-    friday_start = models.TimeField(blank=True, null=True)
-    friday_end = models.TimeField(blank=True, null=True)
-    saturday_start = models.TimeField(blank=True, null=True)
-    saturday_end = models.TimeField(blank=True, null=True)
-    sunday_start = models.TimeField(blank=True, null=True)
-    sunday_end = models.TimeField(blank=True, null=True)
+class Beer(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False, verbose_name="Nazwa")
+    description = models.TextField(blank=True, null=True, verbose_name="opis")
+    price = models.IntegerField(blank=False, null=False, validators=[MinValueValidator(0)], verbose_name="Cena (zł)")
+
+    def __str__(self):
+        return self.name
+
+class OpeningHours(models.Model):
+    day_of_week = models.CharField(max_length=30, blank=False, null=False, verbose_name="Dzień tygodnia")
+    day_start = models.TimeField(blank=True, null=True, verbose_name="Godzina otwarcie")
+    day_end = models.TimeField(blank=True, null=True, verbose_name="Godzina zamknięcia")
+    if_open = models.BooleanField(default=True, verbose_name="Czy otwarte", help_text="odznacz jeśli zamknięte")
+
 
 
 

@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #Przy deplopy na heroku wylaczyc
-#STATICFILES_DIRS = ['static']
+#S1TATICFILES_DIRS = ['static']
 
 MEDIA_URL = '/media/'
 

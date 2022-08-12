@@ -1,18 +1,21 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Pizza, Dish, Alcohol, Drink, Data, FunFacts
-from .forms import PizzaForm, DishForm, AlcoholForm, DrinkForm
+from .models import Pizza, Meal, Vodka, Drink, Shot, Coffee, Beer, OpeningHours, FunFacts
+from .forms import PizzaForm, MealForm, ShotForm, VodkaForm, BeerForm, DrinkForm, CoffeeForm, OpeningHoursForm
 from django.contrib.auth.decorators import login_required
 
 
 def index(request):
     fun_facts = FunFacts.objects.all()
     pizza = Pizza.objects.all()
-    dish = Dish.objects.all()
-    alcohol = Alcohol.objects.all()
+    meal = Meal.objects.all()
+    shot = Shot.objects.all()
     drink = Drink.objects.all()
-    data = Data.objects.all()
+    beer = Beer.objects.all()
+    vodka = Vodka.objects.all()
+    coffee = Coffee.objects.all()
+    opening_hours = OpeningHours.objects.all()
 
-    return render(request, 'index.html', {'pizza': pizza, 'dish': dish, 'alcohol': alcohol, 'drink': drink, 'data': data, 'fun_facts': fun_facts})
+    return render(request, 'index.html', {'pizza': pizza,'beer': beer,'vodka': vodka,'coffee': coffee, 'meal': meal, 'shot': shot, 'drink': drink, 'opening_hours': opening_hours, 'fun_facts': fun_facts})
 
 
 @login_required()
@@ -23,14 +26,23 @@ def new_position(request):
     if "drink" in current_url:
         form = DrinkForm(request.POST or None, request.FILES or None)
 
-    elif "danie" in current_url:
-        form = DishForm(request.POST or None, request.FILES or None)
+    elif "zab" in current_url:
+        form = MealForm(request.POST or None, request.FILES or None)
+
+    elif "piwo" in current_url:
+        form = BeerForm(request.POST or None, request.FILES or None)
 
     elif "pizza" in current_url:
         form = PizzaForm(request.POST or None, request.FILES or None)
 
+    elif "kawa" in current_url:
+        form = CoffeeForm(request.POST or None, request.FILES or None)
+
+    elif "wodka" in current_url:
+        form = VodkaForm(request.POST or None, request.FILES or None)
+
     else:
-        form = AlcoholForm(request.POST or None, request.FILES or None)
+        form = ShotForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
         form.save()
@@ -48,17 +60,29 @@ def edit(request,id):
         object = get_object_or_404(Drink, pk=id)
         form = DrinkForm(request.POST or None, request.FILES or None, instance=object)
 
-    elif "danie" in current_url:
-        object = get_object_or_404(Dish, pk=id)
-        form = DishForm(request.POST or None, request.FILES or None, instance=object)
+    elif "piwo" in current_url:
+        object = get_object_or_404(Beer, pk=id)
+        form = BeerForm(request.POST or None, request.FILES or None, instance=object)
+
+    elif "kawa" in current_url:
+        object = get_object_or_404(Coffee, pk=id)
+        form = CoffeeForm(request.POST or None, request.FILES or None, instance=object)
+
+    elif "wodka" in current_url:
+        object = get_object_or_404(Vodka, pk=id)
+        form = VodkaForm(request.POST or None, request.FILES or None, instance=object)
+
+    elif "cos_na_zab" in current_url:
+        object = get_object_or_404(Meal, pk=id)
+        form = MealForm(request.POST or None, request.FILES or None, instance=object)
 
     elif "pizza" in current_url:
         object = get_object_or_404(Pizza, pk=id)
         form = PizzaForm(request.POST or None, request.FILES or None, instance=object)
 
     else:
-        object = get_object_or_404(Alcohol, pk=id)
-        form = AlcoholForm(request.POST or None, request.FILES or None, instance=object)
+        object = get_object_or_404(Shot, pk=id)
+        form = ShotForm(request.POST or None, request.FILES or None, instance=object)
 
     if form.is_valid():
         form.save()
@@ -75,17 +99,41 @@ def delete(request,id):
     if "drink" in current_url:
         form = get_object_or_404(Drink, pk=id)
 
-    elif "danie" in current_url:
-        form = get_object_or_404(Dish, pk=id)
+    elif "zab" in current_url:
+        form = get_object_or_404(Meal, pk=id)
+
+    elif "beer" in current_url:
+        form = get_object_or_404(Beer, pk=id)
+
+    elif "kawa" in current_url:
+        form = get_object_or_404(Coffee, pk=id)
+
+    elif "wodka" in current_url:
+        form = get_object_or_404(Vodka, pk=id)
 
     elif "pizza" in current_url:
         form = get_object_or_404(Pizza, pk=id)
 
     else:
-        form = get_object_or_404(Alcohol, pk=id)
+        form = get_object_or_404(Shot, pk=id)
 
     if request.method == "POST":
         form.delete()
         return redirect('/#menu')
 
     return render(request, 'potwierdz.html', {'form': form})
+
+
+@login_required()
+def edit_hours(request, id):
+    current_url = request.build_absolute_uri()
+
+    object = get_object_or_404(OpeningHours, pk=id)
+    form = OpeningHoursForm(request.POST or None, request.FILES or None, instance=object)
+
+
+    if form.is_valid():
+        form.save()
+        return redirect('/#menu')
+
+    return render(request, 'edycja_godzin_otwarcia.html', {'form': form, 'id': id})

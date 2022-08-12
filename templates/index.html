@@ -3,6 +3,7 @@
 {% block body %}
 {% load static %}
 
+<!--TODO: working navigation for mobile version-->
 <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand d-lg-none" href="#"><img src="{% static 'img/logo.jpg'%}"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbarToggler7"
@@ -11,7 +12,7 @@
     </button>
     <div class="collapse navbar-collapse"  id="myNavbarToggler7">
         <div class="annotation p-3  ">
-                <p>Dzisiaj jesteśmy otwarci do 24:00</p>
+                <p id="demo"></p>
             </div>
         <ul class="navbar-nav mx-auto">
             <li class="nav-item">
@@ -103,13 +104,23 @@
         <div class="menu-bar my-5 text-center" >
             <div class="row noselect">
                 <div class="col-sm">
+                    <h4 id="meals-div" onclick="showMe('meals-menu')" class="p-2">COŚ NA ZĄB {% if user.is_authenticated %}<a class="admin-button" href="/nowy_cos_na_zab"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
+                </div>
+                <div class="col-sm">
                     <h4 id="pizza-div" onclick="showMe('pizza-menu')" class="p-2">PIZZA {% if user.is_authenticated %}<a class="admin-button" href="/nowa_pizza"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
                 </div>
                 <div class="col-sm">
-                    <h4 id="dishes-div" onclick="showMe('dishes-menu')" class="p-2">DANIA {% if user.is_authenticated %}<a class="admin-button" href="/nowe_danie"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
+                    <h4 id="coffee-div" onclick="showMe('coffee-menu')" class="p-2">KAWY {% if user.is_authenticated %}<a class="admin-button" href="/nowa_kawa"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
                 </div>
                 <div class="col-sm">
-                    <h4 id="alcohol-div" onclick="showMe('alcohol-menu')" class="p-2">ALKOHOLE {% if user.is_authenticated %}<a class="admin-button" href="/nowy_alkohol"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
+                    <h4 id="beers-div" onclick="showMe('beer-menu')" class="p-2">PIWO {% if user.is_authenticated %}<a class="admin-button" href="/nowe_piwo"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
+                </div>
+
+                <div class="col-sm">
+                    <h4 id="vodka-div" onclick="showMe('vodka-menu')" class="p-2">WÓDKA {% if user.is_authenticated %}<a class="admin-button" href="/nowa_wodka"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
+                </div>
+                <div class="col-sm">
+                    <h4 id="shots-div" onclick="showMe('shot-menu')" class="p-2">KIELISZEK {% if user.is_authenticated %}<a class="admin-button" href="/nowy_kieliszek"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
                 </div>
                 <div class="col-sm">
                     <h4 id="drinks-div" onclick="showMe('drinks-menu')" class="p-2">DRINKI {% if user.is_authenticated %}<a class="admin-button" href="/nowy_drink"><i class="fas fa-plus-square"></i></a>{% endif %}</h4>
@@ -138,36 +149,90 @@
         </div>
         </div>
 
-        <div id="dishes-menu" class="dish-list" style="display:none;" >
+        <div id="meals-menu" class="dish-list" style="display:none;" >
             <dic class="tittle-dishes">
-                <h2>DANIA</h2>
+                <h2>COŚ NA ZĄB</h2>
             </dic>
             <div class="px-5 row">
-                {% for single_dish in dish %}
-            <div class="dish col-10">
-                <h3 class="dots">{{ single_dish.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_danie/{{ single_dish.pk }}"> <i class="fas fa-edit"></i></a> <a class="admin-button" href="usun_danie/{{ single_dish.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
-                <p class="text-lowercas">({{ single_dish.description }})</p>
+                {% for single_meal in meal %}
+            <div class="meal col-10">
+                <h3 class="dots">{{ single_meal.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_cos_na_zab/{{ single_meal.pk }}"> <i class="fas fa-edit"></i></a> <a class="admin-button" href="usun_cos_na_zab/{{ single_meal.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
+                <p class="text-lowercas">({{ single_meal.description }})</p>
             </div>
             <div class="price-1 col-1">
-                <h4>{{single_dish.price}}zł</h4>
+                <h4>{{single_meal.price}}zł</h4>
             </div>
                 {% endfor %}
         </div>
 
         </div>
 
-        <div id="alcohol-menu" class="dish-list" style="display:none;" >
+        <div id="coffee-menu" class="dish-list" style="display:none;" >
             <dic class="tittle-dishes">
-                <h2>ALKOHOLE</h2>
+                <h2>KAWA</h2>
             </dic>
             <div class="px-5 row">
-                {% for single_alcohol in alcohol %}
+                {% for single_coffee in coffee %}
             <div class="dish col-10">
-                <h3 class="dots">{{ single_alcohol.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_alkohol/{{ single_alcohol.pk }}"> <i class="fas fa-edit"></i></a><a class="admin-button" href="usun_alkohol/{{ single_alcohol.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
-                <p class="text-lowercas">({{ single_alcohol.description }})</p>
+                <h3 class="dots">{{ single_coffee.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_kawa/{{ single_coffee.pk }}"> <i class="fas fa-edit"></i></a> <a class="admin-button" href="usun_kawa/{{ single_coffee.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
+                <p class="text-lowercas">({{ single_coffee.description }})</p>
             </div>
             <div class="price-1 col-1">
-                <h4>{{single_alcohol.price}}zł</h4>
+                <h4>{{single_coffee.price}}zł</h4>
+            </div>
+                {% endfor %}
+        </div>
+
+        </div>
+
+        <div id="beer-menu" class="dish-list" style="display:none;" >
+            <dic class="tittle-dishes">
+                <h2>PIWO</h2>
+            </dic>
+            <div class="px-5 row">
+                {% for single_beer in beer %}
+            <div class="dish col-10">
+                <h3 class="dots">{{ single_beer.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_piwo/{{ single_beer.pk }}"> <i class="fas fa-edit"></i></a><a class="admin-button" href="usun_piwo/{{ single_beer.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
+                <p class="text-lowercas">({{ single_beer.description }})</p>
+            </div>
+            <div class="price-1 col-1">
+                <h4>{{single_beer.price}}zł</h4>
+            </div>
+                {% endfor %}
+        </div>
+
+        </div>
+
+        <div id="vodka-menu" class="dish-list" style="display:none;" >
+            <dic class="tittle-dishes">
+                <h2>WÓDKA</h2>
+            </dic>
+            <div class="px-5 row">
+                {% for single_vodka in vodka %}
+            <div class="dish col-10">
+                <h3 class="dots">{{ single_vodka.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_wodka/{{ single_vodka.pk }}"> <i class="fas fa-edit"></i></a><a class="admin-button" href="usun_wodka/{{ single_vodka.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
+                <p class="text-lowercas">({{ single_vodka.description }})</p>
+            </div>
+            <div class="price-1 col-1">
+                <h4>{{single_vodka.price}}zł</h4>
+            </div>
+                {% endfor %}
+        </div>
+
+        </div>
+
+        <div id="shot-menu" class="dish-list" style="display:none;" >
+            <dic class="tittle-dishes">
+                <h2>KIELISZEK</h2>
+            </dic>
+            <div class="px-5 row">
+                {% for single_shot in shot %}
+            <div class="dish col-10">
+                <h3 class="dots">{{ single_shot.name }} {% if user.is_authenticated %}<a class="admin-button" href="edytuj_kieliszek/{{ single_shot.pk }}"> <i class="fas fa-edit"></i></a><a class="admin-button" href="usun_kieliszek/{{ single_shot.pk }}"> <i class="fas fa-trash-alt"></i></a>{% endif %}</h3>
+                <p class="text-lowercas">({{ single_shot.description }})</p>
+            </div>
+            <div class="price-1 col-1">
+                <h4>{{single_shot.price}}zł</h4>
             </div>
                 {% endfor %}
         </div>
@@ -221,13 +286,13 @@
                             <p>Niedziela</p>
                         </div>
                         <div class="col text-start">
-                            <p>zamknięte</p>
-                            <p>14-22</p>
-                            <p>14-22</p>
-                            <p>14-22</p>
-                            <p>14-24</p>
-                            <p>14-24</p>
-                            <p>14-22</p>
+                            {% for day in opening_hours %}
+                            {% if day.if_open %}
+                                <p>{{day.day_start}}-{{day.day_end}}{% if user.is_authenticated %}<a class="admin-button" href="edycja_godzin_otwarcia/{{ day.pk }}"> <i class="fas fa-edit"></i></a> {% endif %}</p>
+                            {% else %}
+                                <p>Zamknięte {% if user.is_authenticated %}<a class="admin-button" href="edycja_godzin_otwarcia/{{ day.pk }}"> <i class="fas fa-edit"></i></a> {% endif %}</p>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -245,8 +310,25 @@
 
 
 
+<script>
+    function getDayOfWeek(){
+    const d = new Date("July 21, 1983 01:15:00");
+    let today = d.getDay()
+
+    var days_start = ["{{opening_hours.0.day_start}}","{{opening_hours.1.day_start}}", "{{opening_hours.2.day_start}}", "{{opening_hours.3.day_start}}", "{{opening_hours.4.day_start}}", "{{opening_hours.5.day_start}}", "{{opening_hours.6.day_start}}"];
+    var days_end = ["{{opening_hours.0.day_end}}","{{opening_hours.1.day_end}}", "{{opening_hours.2.day_end}}", "{{opening_hours.3.day_end}}", "{{opening_hours.4.day_end}}", "{{opening_hours.5.day_end}}", "{{opening_hours.6.day_end}}"];
+    var days_if_open = ["{{opening_hours.0.if_open}}","{{opening_hours.1.if_open}}", "{{opening_hours.2.if_open}}", "{{opening_hours.3.if_open}}", "{{opening_hours.4.if_open}}", "{{opening_hours.5.if_open}}", "{{opening_hours.6.if_open}}"];
+
+    if (days_if_open[today-1] == "True"){
+        document.getElementById("demo").innerHTML = "Dzisiaj otwarte od " + days_start[today-1]  + " do " + days_end[today-1];
+    }
+    else{
+        document.getElementById("demo").innerHTML = "Dzisiaj zamknięte";
+    }
 
 
+    }
+</script>
 
 
 {% endblock %}

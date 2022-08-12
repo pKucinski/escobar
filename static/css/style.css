@@ -341,7 +341,7 @@ text-align: center;
 /* You might want to play around with
    width, height, max-width, max-height
    to fit portrait / landscape pictures properly. */
-width: 100%;
+width: 70%;
 height: auto;
 overflow-y: hidden;
 
@@ -356,4 +356,9 @@ margin: 0 auto; */
 
 .admin-button:hover{
     filter: brightness(0.85);
+}/* (C) LIGHTBOX IMAGE - FULLSCREEN ALTERNATIVE *
+#lightbox img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }

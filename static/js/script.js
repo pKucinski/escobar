@@ -1,3 +1,7 @@
+
+
+
+
 var currentDiv = document.getElementById('pizza-menu');
 var nr = 0;
 

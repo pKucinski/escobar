@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from main.views import index, new_position, edit, delete, edit_hours
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,4 +45,4 @@ urlpatterns = [
     path('usun_kieliszek/<int:id>/', delete),
 
     path('edycja_godzin_otwarcia/<int:id>/', edit_hours),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

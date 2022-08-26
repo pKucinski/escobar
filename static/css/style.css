@@ -94,6 +94,15 @@ a:hover{
 font-size: 23px;
 }
 
+@media (min-width: 576px) {
+#about-us img{
+padding-right:30px;
+padding-left:30px;
+padding-bottom:30px;
+
+}  }
+
+
 
 .menu-border{
 border: 4px solid #fff;
